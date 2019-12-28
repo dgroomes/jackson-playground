@@ -1,0 +1,49 @@
+plugins {
+    id "java"
+    id "application"
+}
+
+ext {
+    slf4jVersion = "1.7.26"
+    jacksonVersion = "2.10.1"
+    junitVersion = "5.5.1"
+}
+
+// Awkwardly configure Java Preview features by adding this JDK option in three different places! Hoping for Gradle to
+// make it a single configuration switch.
+// https://stackoverflow.com/a/58483504
+tasks.withType(JavaCompile) {
+    options.compilerArgs += "--enable-preview"
+}
+tasks.withType(Test) {
+    jvmArgs += "--enable-preview"
+}
+tasks.withType(JavaExec) {
+    jvmArgs += '--enable-preview'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+application {
+    mainClassName = "dgroomes.Runner"
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat "full"
+    }
+}
