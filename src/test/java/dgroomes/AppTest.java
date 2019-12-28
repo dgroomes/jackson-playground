@@ -1,6 +1,5 @@
 package dgroomes;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,10 +24,7 @@ class AppTest {
 
     /**
      * Deserialize to a target class that only has a constructor.
-     * This fails!
-     * Do we need to configure Jackson specially to accommodate constructor-based deserialization?
      */
-    @Disabled
     @Test
     void withConstructor() throws Exception {
         execute(EnvelopeWithConstructor.class);
