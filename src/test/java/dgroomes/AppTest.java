@@ -33,4 +33,9 @@ class AppTest {
     void withConstructor() throws Exception {
         execute(EnvelopeWithConstructor.class);
     }
+
+    @Test
+    void withPojo() throws Exception {
+        execute(EnvelopePojo.class);
+    }
 }
