@@ -1,5 +1,6 @@
 package dgroomes;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,9 +23,12 @@ class AppTest {
         execute(EnvelopeWithSetter.class);
     }
 
-    /**
-     * Deserialize to a target class that only has a constructor.
-     */
+    @Test
+    void withConstructorJacksonAnnotated() throws Exception {
+        execute(EnvelopeWithConstructorJacksonAnnotated.class);
+    }
+
+    @Disabled
     @Test
     void withConstructor() throws Exception {
         execute(EnvelopeWithConstructor.class);
