@@ -1,15 +1,6 @@
 package dgroomes;
 
-/**
- * Modelling JSON like:
- *
- * {
- *     "message": "hello"
- * }
- *
- * Can we use Java "Records" to model this data?
- */
-public class PayloadWithMessage {
+public class EnvelopeWithSetter implements Envelope {
 
     public String getMessage() {
         return message;

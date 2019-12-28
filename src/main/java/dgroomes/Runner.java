@@ -14,7 +14,7 @@ public class Runner {
         """
         { "message": "Hello world."}
         """;
-        var msg = app.extractMessage(json);
+        var msg = app.extractMessage(json, EnvelopeWithSetter.class);
         log.info("Extracted message: {}", msg);
     }
 }
