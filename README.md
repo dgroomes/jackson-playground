@@ -11,4 +11,4 @@ General clean ups, TODOs and things I wish to implement for this project:
   to start experimenting now. 
 * Intellij is complaining of Text Blocks not being available at language level 13. This is an Intellij (bug/feature) 
   unfortunately. Track the issue for its resolution: <https://youtrack.jetbrains.com/issue/IDEA-212618>
-* Why can I not deserialize using a constructor for a class that has only field? Strange, see `dgroomes.AppTest.withConstructor`
+* Why can I not deserialize using a constructor for a class that has only one field? Strange, see `dgroomes.AppTest.withConstructor`
