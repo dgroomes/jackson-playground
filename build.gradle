@@ -13,7 +13,7 @@ ext {
 // make it a single configuration switch.
 // https://stackoverflow.com/a/58483504
 tasks.withType(JavaCompile) {
-    options.compilerArgs += "--enable-preview"
+    options.compilerArgs += ["-parameters", "--enable-preview"]
 }
 tasks.withType(Test) {
     jvmArgs += "--enable-preview"
@@ -23,6 +23,7 @@ tasks.withType(JavaExec) {
 }
 
 repositories {
+    mavenLocal()
     jcenter()
 }
 
@@ -30,6 +31,7 @@ dependencies {
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
     implementation "org.slf4j:slf4j-simple:$slf4jVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"

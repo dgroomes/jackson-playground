@@ -3,9 +3,12 @@ package dgroomes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Harness for exercising FasterXML/Jackson
+ */
 public class App {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    public ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Extract the "message" field of a JSON payload.

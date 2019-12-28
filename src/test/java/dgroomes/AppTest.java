@@ -1,5 +1,6 @@
 package dgroomes;
 
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -7,15 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppTest {
 
-    private <T extends Envelope> void execute(Class<T> targetClass) throws Exception {
-        var classUnderTest = new App();
+    /**
+     * Test harness
+     */
+    private <T extends Envelope> void execute(App app, Class<T> targetClass) throws Exception {
         String json = """
                 { "message": "Hello from the tests!"}
                 """;
 
-        var msg = classUnderTest.extractMessage(json, targetClass);
+        var msg = app.extractMessage(json, targetClass);
 
         assertEquals("Hello from the tests!", msg);
+    }
+
+    private <T extends Envelope> void execute(Class<T> targetClass) throws Exception {
+        execute(new App(), targetClass);
     }
 
     @Test
@@ -28,10 +35,23 @@ class AppTest {
         execute(EnvelopeWithConstructorJacksonAnnotated.class);
     }
 
+    /**
+     * I don't know why this is failing. If I add an extraneous field to the class, I can get it work. See
+     * {@link #withConstructorWithExtraneousField()}
+     */
     @Disabled
     @Test
     void withConstructor() throws Exception {
-        execute(EnvelopeWithConstructor.class);
+        var app = new App();
+        app.objectMapper.registerModule(new ParameterNamesModule());
+        execute(app, EnvelopeWithConstructor.class);
+    }
+
+    @Test
+    void withConstructorWithExtraneousField() throws Exception {
+        var app = new App();
+        app.objectMapper.registerModule(new ParameterNamesModule());
+        execute(app, EnvelopeWithConstructorWithExtraneousField.class);
     }
 
     @Test
