@@ -1,7 +1,6 @@
 package dgroomes;
 
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,10 +35,9 @@ class AppTest {
     }
 
     /**
-     * I don't know why this is failing. If I add an extraneous field to the class, I can get it work. See
-     * {@link #withConstructorWithExtraneousField()}
+     * This is an edge case where you must be careful. A class with a single-arg constructor must have its arg annotated
+     * with @JsonProperty("propertyName"). See note at https://github.com/FasterXML/jackson-modules-java8/pull/26/files
      */
-    @Disabled
     @Test
     void withConstructor() throws Exception {
         var app = new App();

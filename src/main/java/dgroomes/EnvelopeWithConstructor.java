@@ -1,12 +1,14 @@
 package dgroomes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class EnvelopeWithConstructor implements Envelope {
 
     private String message;
 
-    public EnvelopeWithConstructor(String message) {
+    public EnvelopeWithConstructor(@JsonProperty("message") String message) {
         this.message = message;
     }
 
