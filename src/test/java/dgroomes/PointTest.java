@@ -3,6 +3,7 @@ package dgroomes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import dgroomes.point.PointPojo;
+import dgroomes.point.PointRecord;
 import dgroomes.point.PointWithConstructor;
 import dgroomes.point.PointWithConstructorWithJsonPropertyAnnotations;
 import dgroomes.point.PointWithSetter;
@@ -48,5 +49,12 @@ class PointTest {
         var extracted = mapper.readValue(json, PointWithConstructorWithJsonPropertyAnnotations.class);
 
         assertEquals(1, extracted.getX());
+    }
+
+    @Test
+    void record() throws Exception {
+        var extracted = mapperParamNames.readValue(json, PointRecord.class);
+
+        assertEquals(1, extracted.x());
     }
 }
