@@ -1,7 +1,5 @@
 package dgroomes;
 
-import java.util.Objects;
-
 /**
  * Plain Old Java Object (POJO): No setters or constructors; just a public field (plus the getter method to accommodate
  * the interface)

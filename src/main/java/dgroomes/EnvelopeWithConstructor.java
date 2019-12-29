@@ -2,8 +2,6 @@ package dgroomes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 /**
  * Ideally, there should be no Jackson annotations in this class if we aim to keep our model classes decoupled from the
  * deserialization/serialization concerns by leveraging the Jackson ParameterNamesModule. But there is a special case

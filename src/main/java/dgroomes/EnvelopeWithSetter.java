@@ -1,7 +1,5 @@
 package dgroomes;
 
-import java.util.Objects;
-
 public class EnvelopeWithSetter implements Envelope {
 
     private String message;

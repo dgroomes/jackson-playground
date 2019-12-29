@@ -1,7 +1,5 @@
 package dgroomes;
 
-import java.util.Objects;
-
 /**
  * Companion example to dgroomes.EnvelopeWithConstructor which illustrates how a model class be completely bare of
  * Jackson annotations.

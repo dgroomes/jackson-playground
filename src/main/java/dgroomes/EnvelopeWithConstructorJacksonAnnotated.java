@@ -3,8 +3,6 @@ package dgroomes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 /**
  * Notice the Jackson annotations on the constructor. This is needed for Jackson to be able to deserialize to this class
  * using its constructor because normally parameter names are not available at runtime because they are optimized away.
