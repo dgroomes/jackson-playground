@@ -6,20 +6,42 @@ plugins {
 ext {
     slf4jVersion = "1.7.26"
     jacksonVersion = "2.10.1"
-    junitVersion = "5.5.1"
+    junitPlatformVersion = "1.5.2"
+    junitJupiterVersion = "5.5.1"
 }
 
-// Awkwardly configure Java Preview features by adding this JDK option in three different places! Hoping for Gradle to
-// make it a single configuration switch.
-// https://stackoverflow.com/a/58483504
+java {
+
+    /**
+     * This is how to configure the Java compilation task to use Java 14.
+     * In this case, we are using Gradle 6, which supports up to Java 13. So, JavaVersion.VERSION_HIGHER resolves to the
+     * "next version of Java after 13" which is 14. See https://github.com/gradle/gradle/blob/2af1a363f3d3b8d69f5bb1f07dde828b635edfe6/subprojects/base-services/src/main/java/org/gradle/api/JavaVersion.java#L58
+     * There is no way to configure Java 15 or beyond until Gradle supports Java 14. And so on for future versions of
+     * Java and Gradle.
+     */
+    sourceCompatibility = JavaVersion.VERSION_HIGHER
+}
+
+def java14Home = System.getenv("JAVA_14_HOME")
+if (java14Home == null || java14Home.isBlank()) {
+    throw new IllegalArgumentException("JAVA_14_HOME environment variable must be set to the path of JDK14 but was not set")
+}
+
+def java14HomeFile = new File(java14Home)
+if (!java14HomeFile.exists()) {
+    throw new IllegalArgumentException("JAVA_14_HOME environment variable must be set to the path of JDK14 but was not a real file: $java14Home")
+}
+
+/**
+ * Configure the compiler step to accommodate:
+ * - Java 14 by forking a javac process using JDK 14 instead of the Java that is running the Gradle process (Gradle does not support 14)
+ * - Java 14 preview features
+ * - Preserve parameter names in the bytecode to enable Jackson to deserialize using constructors
+ */
 tasks.withType(JavaCompile) {
-    options.compilerArgs += ["-parameters", "--enable-preview"]
-}
-tasks.withType(Test) {
-    jvmArgs += "--enable-preview"
-}
-tasks.withType(JavaExec) {
-    jvmArgs += '--enable-preview'
+    options.fork = true
+    options.forkOptions.javaHome = java14HomeFile
+    options.compilerArgs += ["--enable-preview", "-parameters"]
 }
 
 repositories {
@@ -27,25 +49,46 @@ repositories {
     jcenter()
 }
 
+configurations {
+    junitLauncher
+}
+
+/**
+ * Print the path to the standalone JUnit Console Launcher JAR so it can be used later by "test.sh" to execute the JUnit
+ * tests. It's great to leverage Gradle for managing dependencies and setting up environment information for a
+ * downstream process like "test.sh"
+ */
+task printJunitLauncherPath() {
+    doLast {
+        configurations.junitLauncher.resolve().each {
+            new File(buildDir, "junit-launcher-path.txt").text = "$it"
+        }
+    }
+}
+
+/**
+ * Support the standalone JUnit Console Launcher by printing the test class path to a file. This task is used in
+ * conjunction with 'printJunitLauncherPath'.
+ */
+task printTestClassPath() {
+    doLast {
+        def classpath = sourceSets.test.runtimeClasspath.join(":")
+        new File(buildDir, "test-classpath.txt").text = "$classpath"
+    }
+}
+
 dependencies {
+    junitLauncher "org.junit.platform:junit-platform-console-standalone:$junitPlatformVersion"
+
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
     implementation "org.slf4j:slf4j-simple:$slf4jVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
 }
 
 application {
     mainClassName = "dgroomes.Runner"
-}
-
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        showStandardStreams = true
-        exceptionFormat "full"
-    }
 }
