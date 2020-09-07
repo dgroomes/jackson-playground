@@ -4,16 +4,17 @@ Learning and exploring Jackson <https://github.com/FasterXML/jackson>.
 
 ## Description
 
-This project uses Java 14 and the new `Records` language feature <https://openjdk.java.net/jeps/359>. Gradle itself 
-cannot run on Java 14. It cannot use Java 14 for execution tasks like `test`. Fortunately, Gradle does support compiling
-Java 14 code because it can fork a process using a different JDK to execute the compile task.
+This project uses Java 14 and the new `Records` language feature <https://openjdk.java.net/jeps/359>. Jackson is often
+a core component of a Java application for serializing/deserializing to and from JSON. Does it work with Java Records?
+(Answer: yes!).  
 
 ## Instructions
 
-1. Set the environment variable `JAVA_14_HOME` to the path of a JDK 14 installation on your computer
-1. Run the tests with `./test.sh` (this will also build the project if not built already)
-    * This uses the Standalone JUnit Console Launcher <https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher>
-      and Java 14
+1. Use Java 14
+1. Build and test with `./gradlew build`
+1. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
+   your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests by
+   executing `./gradlew cleanTest` and then running your tests with `./gradlew build` or `./gradlew test`.
                         `
 ## WishList
 
