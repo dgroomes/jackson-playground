@@ -4,13 +4,13 @@ Learning and exploring Jackson <https://github.com/FasterXML/jackson>.
 
 ## Description
 
-This project uses Java 14 and the new `Records` language feature <https://openjdk.java.net/jeps/359>. Jackson is often
-a core component of a Java application for serializing/deserializing to and from JSON. Does it work with Java Records?
-(Answer: yes!).  
+This project explores the Jackson library and predominantly focuses on the new `Records` language feature <https://openjdk.java.net/jeps/359>.
+Jackson is often a core component of a Java application for serializing/deserializing to and from JSON. Does it work
+with Java Records? (Answer: yes!).  
 
 ## Instructions
 
-1. Use Java 14
+1. Use Java 15
 1. Build and test with `./gradlew build`
 1. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
    your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests by
@@ -20,5 +20,5 @@ a core component of a Java application for serializing/deserializing to and from
 
 General clean ups, TODOs and things I wish to implement for this project:
 
-* Intellij is complaining of Text Blocks not being available at language level 13. This is an Intellij (bug/feature) 
-  unfortunately. Track the issue for its resolution: <https://youtrack.jetbrains.com/issue/IDEA-212618>
+* Use Jackson's CSV support
+* Experiment with serializing from Records to a string, not just deserializing from a string into Records

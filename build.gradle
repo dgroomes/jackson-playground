@@ -4,14 +4,14 @@ plugins {
 }
 
 ext {
-    slf4jVersion = "1.7.26"
-    jacksonVersion = "2.10.1"
-    junitPlatformVersion = "1.5.2"
-    junitJupiterVersion = "5.5.1"
+    slf4jVersion = "1.7.30" // releases: http://www.slf4j.org/news.html
+    jacksonVersion = "2.11.2" // releases: https://github.com/FasterXML/jackson/wiki/Jackson-Releases
+    junitPlatformVersion = "1.7.0" // releases: https://github.com/junit-team/junit5/releases
+    junitJupiterVersion = "5.7.0"
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_14
+    sourceCompatibility = JavaVersion.VERSION_15
 }
 
 /**
