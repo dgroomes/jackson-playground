@@ -1,11 +1,11 @@
 package dgroomes.point;
 
 /**
- * This class has setters but no constructor.
+ * This class has getters/setters but no constructor.
  *
  * Jackson is able to to serialize/deserialize to this class without any special configuration.
  */
-public class PointWithSetter {
+public class PointWithGettersAndSetters {
 
     private Integer x;
     private Integer y;

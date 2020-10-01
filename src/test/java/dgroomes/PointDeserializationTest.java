@@ -25,8 +25,8 @@ class PointDeserializationTest extends BaseTest {
     }
 
     @Test
-    void withSetter() throws Exception {
-        var extracted = mapper.readValue(json, PointWithSetter.class);
+    void withSetters() throws Exception {
+        var extracted = mapper.readValue(json, PointWithGettersAndSetters.class);
 
         assertEquals(1, extracted.getX());
     }
