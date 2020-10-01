@@ -1,8 +1,6 @@
 package dgroomes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import dgroomes.singleargconstructor.SingleArgConstructor;
 import dgroomes.singleargconstructor.SingleArgConstructorWithJsonProperty;
 import org.junit.jupiter.api.Test;
@@ -10,16 +8,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class SingleArgConstructorTest {
+/**
+ * Deserializing a JSON document for a target Java type that has a single-arg constructor. Single-arg constructors are a
+ * special case for Jackson.
+ */
+class SingleArgConstructorTest extends BaseTest {
 
-    ObjectMapper mapper = new ObjectMapper();
-    ObjectMapper mapperParamNames = new ObjectMapper().registerModule(new ParameterNamesModule());
-    String json =
-        """
-        {
-           "message": "hello"
-        }
-        """;
+    String json = """
+            {
+               "message": "hello"
+            }
+            """;
 
     @Test
     void withParameterNamesModule() {

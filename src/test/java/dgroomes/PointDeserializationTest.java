@@ -1,22 +1,16 @@
 package dgroomes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import dgroomes.point.PointPojo;
-import dgroomes.point.PointRecord;
-import dgroomes.point.PointWithConstructor;
-import dgroomes.point.PointWithConstructorWithJsonPropertyAnnotations;
-import dgroomes.point.PointWithSetter;
+import dgroomes.point.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PointTest {
+/**
+ * Deserializing a JSON document using various target Java types including a Record-based type ({@link PointRecord}.
+ */
+class PointDeserializationTest extends BaseTest {
 
-    ObjectMapper mapper = new ObjectMapper();
-    ObjectMapper mapperParamNames = new ObjectMapper().registerModule(new ParameterNamesModule());
-    String json =
-            """
+    String json = """
             {
                "x": 1,
                "y": 2
