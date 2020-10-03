@@ -11,6 +11,7 @@ REPOS=(
   jackson-annotations
   jackson-databind
   jackson-modules-java8
+  jackson-dataformats-text
 )
 
 for repo in "${REPOS[@]}"; do

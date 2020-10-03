@@ -13,3 +13,6 @@
 [submodule "jackson-bom"]
 	path = jackson-bom
 	url = https://github.com/FasterXML/jackson-bom.git
+[submodule "jackson-dataformats-text"]
+	path = jackson-dataformats-text
+	url = https://github.com/FasterXML/jackson-dataformats-text

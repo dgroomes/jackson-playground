@@ -17,6 +17,8 @@ are in [Instructions](#instructions).
 
 ## Instructions
 
+NOTE: I am using macOS and Bash 5.x
+
 1. Switch to Java 11
 1. Build the "edge version" of the Jackson artifacts with `./build-jackson-artifacts.sh`
 1. Switch to Java 15
