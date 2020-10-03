@@ -31,4 +31,4 @@ General clean ups, TODOs and things I wish to implement for this project:
 
 * Use Jackson's CSV support
 * DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
-* Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference) 
+* DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference) 
