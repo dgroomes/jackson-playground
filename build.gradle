@@ -5,7 +5,7 @@ plugins {
 
 ext {
     slf4jVersion = "1.7.30" // releases: http://www.slf4j.org/news.html
-    jacksonVersion = "2.11.2" // releases: https://github.com/FasterXML/jackson/wiki/Jackson-Releases
+    jacksonVersion = "2.12.0-SNAPSHOT" // these artifacts must be built from source. see the README.md
     junitPlatformVersion = "1.7.0" // releases: https://github.com/junit-team/junit5/releases
     junitJupiterVersion = "5.7.0"
 }
@@ -40,8 +40,10 @@ repositories {
 dependencies {
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
     implementation "org.slf4j:slf4j-simple:$slf4jVersion"
-    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
+
+    implementation(platform("com.fasterxml.jackson:jackson-bom:$jacksonVersion"))
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"

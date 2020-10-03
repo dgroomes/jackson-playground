@@ -3,7 +3,6 @@ package dgroomes;
 import dgroomes.point.PointPojo;
 import dgroomes.point.PointRecord;
 import dgroomes.point.PointWithGettersAndSetters;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,10 +38,9 @@ public class PointSerializationTest extends BaseTest {
     }
 
     /**
-     * This does not work! Why? I'm not really sure... see https://github.com/FasterXML/jackson-future-ideas/issues/46
-     * Adding `@JsonAutoDetect` annotation should fix it but I'm not sure why.
+     * This "just works" starting in Jackson version 2.12!
+     * See https://github.com/FasterXML/jackson-future-ideas/issues/46
      */
-    @Disabled
     @Test
     void record() throws Exception {
         var point = new PointRecord(1, 2);

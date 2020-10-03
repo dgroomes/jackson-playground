@@ -1,0 +1,15 @@
+[submodule "jackson-databind"]
+	path = jackson-databind
+	url = https://github.com/FasterXML/jackson-databind
+[submodule "jackson-core"]
+	path = jackson-core
+	url = https://github.com/FasterXML/jackson-core.git
+[submodule "jackson-annotations"]
+	path = jackson-annotations
+	url = https://github.com/FasterXML/jackson-annotations.git
+[submodule "jackson-modules-java8"]
+	path = jackson-modules-java8
+	url = https://github.com/FasterXML/jackson-modules-java8.git
+[submodule "jackson-bom"]
+	path = jackson-bom
+	url = https://github.com/FasterXML/jackson-bom.git
