@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -66,6 +65,33 @@ public class FileDeserializationTest extends BaseTest {
         long linesRead = 0;
         try (var lines = Files.lines(file.toPath())) {
             linesRead = lines.map(line -> {
+                try {
+                    return mapper.readValue(line, DummyType.class);
+                } catch (JsonProcessingException e) {
+                    throw new IllegalStateException(e);
+                }
+            }).count();
+        }
+
+        log.info("Read {} lines from the large JSON temp file", linesRead);
+        assertEquals(10_000_000, linesRead);
+    }
+
+    /**
+     * Just like streamFromFile but parallelizes the JSON deserialization in the "map" operation using "parallel()". On
+     * my computer, the parallelization makes the program about twice as fast.
+     */
+    @Test
+    public void streamFromFile_parallel() throws IOException {
+        record DummyType(String field_a, String field_b) {
+        }
+
+        log.info("Reading from the large JSON temp file");
+        var file = new File(TEMP_FILE);
+
+        long linesRead = 0;
+        try (var lines = Files.lines(file.toPath())) {
+            linesRead = lines.parallel().map(line -> {
                 try {
                     return mapper.readValue(line, DummyType.class);
                 } catch (JsonProcessingException e) {
