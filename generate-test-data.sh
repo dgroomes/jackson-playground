@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
-# Generate a lot of dummy/test JSON data to a temp file.
+# Generate a lot of test data to a temp file. The data is JSON-formatted point data which includes an "x" and "y"
+# fields. E.g.
+#     { "x": 1, "y": 2 }
+#
+# Why does this run so slowly? I know 10 million is a lot of records but still this is so slow. It took 24 minutes to
+# run on my computer. I think 10 million individual invocations of printf is the problem. Maybe an awk program could be
+# used to generate a large file? We could express the interation inside of awk and we wouldn't pay the start up cost 10
+# million times and instead just pay once.
 
 set -eu
 
@@ -11,7 +18,9 @@ LINES=10000000
 > "$DATA_FILE"
 
 time for (( i = 0; i < $LINES; i++ )); do
-  printf '{ "field_a": "%d", "field_b": "value_b" }\n' $i >> "$DATA_FILE"
+  x=$i
+  y=$(($LINES - $x))
+  printf '{ "x": "%d", "y": "%d" }\n' $x $y >> "$DATA_FILE"
 done
 
 echo "Generated a test file of JSON dummy data at $DATA_FILE."

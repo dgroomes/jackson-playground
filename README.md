@@ -35,4 +35,4 @@ General clean ups, TODOs and things I wish to implement for this project:
 * IN PROGRESS Use Jackson's CSV support for deserializing
 * DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
 * DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
-* Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
+* DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
