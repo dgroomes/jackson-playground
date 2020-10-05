@@ -5,7 +5,7 @@ set -eu
 
 mkdir -p tmp
 DATA_FILE=tmp/json_data
-LINES=1000000
+LINES=10000000
 
 # Truncate (if it exists) and create the data file (if it does not already exist)
 > "$DATA_FILE"
