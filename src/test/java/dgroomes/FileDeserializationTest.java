@@ -39,7 +39,7 @@ public class FileDeserializationTest extends BaseTest {
         log.info("Read {} lines from the large JSON temp file", linesRead);
         log.info("The final row was deserialized to an instance of FieldAB equal to {}", point);
         assertEquals(10_000_000, linesRead);
-        var expected = new PointRecord(9_999_999, 1);
+        var expected = new PointRecord(10_000_000, 0);
         assertEquals(expected, point);
     }
 
