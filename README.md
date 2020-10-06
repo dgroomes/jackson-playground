@@ -32,7 +32,7 @@ NOTE: I am using macOS and Bash 5.x
 General clean ups, TODOs and things I wish to implement for this project:
 
 * DONE Use Jackson's CSV support for serializing
-* IN PROGRESS Use Jackson's CSV support for deserializing
+* DONE Use Jackson's CSV support for deserializing
 * DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
 * DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
 * DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
