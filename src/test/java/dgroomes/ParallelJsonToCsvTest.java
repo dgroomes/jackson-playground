@@ -23,6 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParallelJsonToCsvTest extends BaseTest {
 
     private static final Logger log = LoggerFactory.getLogger(ParallelJsonToCsvTest.class);
+
+    private static final int _1KiB = 1024;
+    private static final int _1MiB = _1KiB * _1KiB;
+    private static final int _8MiB = _1MiB * 8;
+    private static final int _100MiB = _1MiB * 100;
+    private static final int _1GiB = _1MiB * _1KiB;
+
+    private static final int OUTPUT_BUFFER_SIZE = _1GiB;
     private static final String TEMP_JSON_FILE = "tmp/json_data";
     private static final String TEMP_CSV_FILE = "tmp/csv_data";
     private static final boolean PARALLEL = true;
@@ -40,7 +48,7 @@ public class ParallelJsonToCsvTest extends BaseTest {
         final AtomicLong linesReadAndWritten = new AtomicLong(0);
         try (var jsonLines = Files.lines(jsonFile.toPath());
              var csvOutputUnbuffered = Files.newOutputStream(csvFile.toPath());
-             var csvOutput = new BufferedOutputStream(csvOutputUnbuffered)) {
+             var csvOutput = new BufferedOutputStream(csvOutputUnbuffered, OUTPUT_BUFFER_SIZE)) {
 
             log.info("Parallel enabled: {}", PARALLEL);
             Stream<String> jsonLinesStream = PARALLEL ? jsonLines.parallel() : jsonLines;

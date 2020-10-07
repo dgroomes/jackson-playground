@@ -81,11 +81,15 @@ public class FileDeserializationTest extends BaseTest {
         log.info("Reading from the large JSON temp file");
         var file = new File(TEMP_FILE);
 
+        var csvSchema = csvMapper.schemaFor(PointRecord.class);
+        var csvWriter = csvMapper.writer(csvSchema);
+
         long linesRead = 0;
         try (var lines = Files.lines(file.toPath())) {
             linesRead = lines.parallel().map(line -> {
                 try {
-                    return mapper.readValue(line, PointRecord.class);
+                    var point = mapper.readValue(line, PointRecord.class);
+                    return csvWriter.writeValueAsBytes(point);
                 } catch (JsonProcessingException e) {
                     throw new IllegalStateException(e);
                 }
