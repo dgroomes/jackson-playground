@@ -11,7 +11,7 @@ set -eu
 
 mkdir -p tmp
 DATA_FILE=tmp/json_data
-export NUMBER_OF_LINES=$(( 100 * 1000 * 1000 ))
+export NUMBER_OF_LINES=$(( 10 * 1000 * 1000 ))
 
 time perl -f <(cat <<'EOF'
     $json_template='{ "x": %d, "y": %d }';

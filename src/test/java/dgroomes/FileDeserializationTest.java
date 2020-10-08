@@ -97,6 +97,6 @@ public class FileDeserializationTest extends BaseTest {
         }
 
         log.info("Read {} lines from the large JSON temp file", linesRead);
-        assertEquals(100_000_000, linesRead);
+        assertEquals(10_000_000, linesRead);
     }
 }
