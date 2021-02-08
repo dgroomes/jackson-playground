@@ -6,7 +6,7 @@ plugins {
 }
 
 val slf4jVersion = "1.7.30" // releases: http://www.slf4j.org/news.html
-val jacksonVersion = "2.12.0-SNAPSHOT" // these artifacts must be built from source. see the README.md
+val jacksonVersion = "2.12.2-SNAPSHOT" // these artifacts must be built from source. see the README.md
 val junitPlatformVersion = "1.7.0" // releases: https://github.com/junit-team/junit5/releases
 val junitJupiterVersion = "5.7.0"
 
@@ -37,7 +37,7 @@ tasks {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

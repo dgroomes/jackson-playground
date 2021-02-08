@@ -19,14 +19,22 @@ are in [Instructions](#instructions).
 
 NOTE: I am using macOS and Bash 5.x
 
+1. After cloning the repo for the first time, you need to also clone the submodules:
+    * `git submodule update --init --recursive`
 1. Switch to Java 11
-1. Build the "edge version" of the Jackson artifacts with `./build-jackson-artifacts.sh`
+1. Build the "edge version" of the Jackson artifacts:
+    * `./build-jackson-artifacts.sh`
 1. Switch to Java 15
-1. Build the project and execute the tests with `./gradlew build`
+1. Generate some test./generate-test-data.sh date (some of the tests depend on this):
+    * ``
+1. Build the project and execute the tests:
+    * `./gradlew build`
 1. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
-   your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests by
-   executing `./gradlew cleanTest` and then running your tests with `./gradlew build` or `./gradlew test`.
-                        `
+   your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests cleaning
+   them out and then running the tests: 
+    * `./gradlew cleanTest`
+    * `./gradlew build` or `./gradlew test`
+
 ## WishList
 
 General clean ups, TODOs and things I wish to implement for this project:
@@ -36,3 +44,4 @@ General clean ups, TODOs and things I wish to implement for this project:
 * DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
 * DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
 * DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
+* Fix on a specific commit in the submodules instead of "master" 
