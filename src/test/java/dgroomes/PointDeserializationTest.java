@@ -1,6 +1,7 @@
 package dgroomes;
 
 import dgroomes.point.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +15,20 @@ class PointDeserializationTest extends BaseTest {
             {
                "x": 1,
                "y": 2
+            }
+            """;
+
+    String jsonMultiWordFields = """
+            {
+               "xCoordinate": 1,
+               "yCoordinate": 2
+            }
+            """;
+
+    String jsonMultiWordFields_snakeCase = """
+            {
+               "x_coordinate": 1,
+               "y_coordinate": 2
             }
             """;
 
@@ -50,5 +65,20 @@ class PointDeserializationTest extends BaseTest {
         var extracted = mapperParamNames.readValue(json, PointRecord.class);
 
         assertEquals(1, extracted.x());
+    }
+
+    @Test
+    void recordWithMultiWordNames() throws Exception {
+        var extracted = mapperParamNames.readValue(jsonMultiWordFields, PointRecordWithMultiWordFields.class);
+
+        assertEquals(1, extracted.xCoordinate());
+    }
+
+    @Disabled("This does not work. The combination of a Java record and snake case JSON cause the break but I'm not sure why.")
+    @Test
+    void recordWithMultiWordNames_snakeCaseJson() throws Exception {
+        var extracted = mapperParamNamesSnakeCase.readValue(jsonMultiWordFields_snakeCase, PointRecordWithMultiWordFields.class);
+
+        assertEquals(1, extracted.xCoordinate());
     }
 }
