@@ -5,28 +5,28 @@ plugins {
     java
 }
 
-val slf4jVersion = "1.7.30" // releases: http://www.slf4j.org/news.html
-val jacksonVersion = "2.12.2-SNAPSHOT" // these artifacts must be built from source. see the README.md
-val junitPlatformVersion = "1.7.0" // releases: https://github.com/junit-team/junit5/releases
-val junitJupiterVersion = "5.7.0"
+val slf4jVersion = "1.7.32" // SLF4J releases: http://www.slf4j.org/news.html
+val jacksonVersion = "2.12.2-SNAPSHOT" // These artifacts must be built from source. See the README.md
+val junitPlatformVersion = "1.8.1" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
+val junitJupiterVersion = "5.8.1"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_15
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 /**
  * Configure the compiler step to accommodate:
- * - Java language preview features
  * - Preserve parameter names in the bytecode to enable Jackson to deserialize using constructors
  */
 tasks {
     withType(JavaCompile::class.java) {
-        options.compilerArgs.addAll(arrayOf("--enable-preview", "-parameters"))
+        options.compilerArgs.addAll(arrayOf("-parameters"))
     }
 
-    withType(Test::class.java) {
+    test {
         useJUnitPlatform()
-        jvmArgs = listOf("--enable-preview")
         testLogging {
             showStandardStreams = true
             events = setOf(TestLogEvent.STARTED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)

@@ -24,7 +24,7 @@ NOTE: I am using macOS and Bash 5.x
 1. Switch to Java 11
 1. Build the "edge version" of the Jackson artifacts:
     * `./build-jackson-artifacts.sh`
-1. Switch to Java 15
+1. Switch to Java 17
 1. Generate some test./generate-test-data.sh date (some of the tests depend on this):
     * ``
 1. Build the project and execute the tests:
@@ -44,4 +44,4 @@ General clean ups, TODOs and things I wish to implement for this project:
 * DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
 * DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
 * DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
-* Fix on a specific commit in the submodules instead of "master" 
+* Fix on a specific commit in the submodules instead of "master"
