@@ -1,7 +1,7 @@
 package dgroomes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
@@ -10,8 +10,13 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
  */
 public abstract class BaseTest {
 
-    ObjectMapper mapper = new ObjectMapper();
-    ObjectMapper mapperParamNames = new ObjectMapper().registerModule(new ParameterNamesModule());
-    ObjectMapper mapperParamNamesSnakeCase = new ObjectMapper().registerModule(new ParameterNamesModule()).setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+    JsonMapper mapper;
+    JsonMapper mapperParamNames;
     CsvMapper csvMapper = new CsvMapper();
+
+    {
+        var builder = JsonMapper.builder().propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+        mapper = builder.build();
+        mapperParamNames = builder.addModule(new ParameterNamesModule()).build();
+    }
 }

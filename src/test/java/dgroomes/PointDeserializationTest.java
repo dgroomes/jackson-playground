@@ -20,13 +20,6 @@ class PointDeserializationTest extends BaseTest {
 
     String jsonMultiWordFields = """
             {
-               "xCoordinate": 1,
-               "yCoordinate": 2
-            }
-            """;
-
-    String jsonMultiWordFields_snakeCase = """
-            {
                "x_coordinate": 1,
                "y_coordinate": 2
             }
@@ -37,6 +30,13 @@ class PointDeserializationTest extends BaseTest {
         var extracted = mapper.readValue(json, PointPojo.class);
 
         assertEquals(1, extracted.x);
+    }
+
+    @Test
+    void pojoWithMultiWordFields() throws Exception {
+        var extracted = mapperParamNames.readValue(jsonMultiWordFields, PointPojoWithMultiWordFields.class);
+
+        assertEquals(1, extracted.xCoordinate);
     }
 
     @Test
@@ -67,17 +67,15 @@ class PointDeserializationTest extends BaseTest {
         assertEquals(1, extracted.x());
     }
 
+    @Disabled("""
+            This does not work. The combination of a Java record and a multi-word snake case JSON field causes the break
+            but I'm not sure why. By contrast, the POJO corollary does work: dgroomes.PointDeserializationTest.pojoWithMultiWordFields.
+            
+            I think this GitHub issue describes the same thing https://github.com/FasterXML/jackson-databind/issues/3102
+            """)
     @Test
-    void recordWithMultiWordNames() throws Exception {
+    void recordWithMultiWordFields() throws Exception {
         var extracted = mapperParamNames.readValue(jsonMultiWordFields, PointRecordWithMultiWordFields.class);
-
-        assertEquals(1, extracted.xCoordinate());
-    }
-
-    @Disabled("This does not work. The combination of a Java record and snake case JSON cause the break but I'm not sure why.")
-    @Test
-    void recordWithMultiWordNames_snakeCaseJson() throws Exception {
-        var extracted = mapperParamNamesSnakeCase.readValue(jsonMultiWordFields_snakeCase, PointRecordWithMultiWordFields.class);
 
         assertEquals(1, extracted.xCoordinate());
     }
