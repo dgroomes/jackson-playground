@@ -6,8 +6,7 @@
 
 This project explores the Jackson (<https://github.com/FasterXML/jackson>) umbrella of serialization/deserialization
 libraries which are often a core component of a Java application that deals with JSON. For example, it illustrates how
-to use the new `Records` Java language feature <https://openjdk.java.net/jeps/359> with Jackson (spoiler: starting with
-Jackson version 2.12 it "just works").
+to use the new `Records` Java language feature <https://openjdk.java.net/jeps/359> with Jackson.
 
 A number of Jackson projects are included in this project as Git submodules because we want to use the latest "edge
 version" of Jackson to get the latest and greatest features. After all, a "📚 Learning and exploring" repository is

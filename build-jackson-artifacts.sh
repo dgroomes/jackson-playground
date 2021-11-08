@@ -4,7 +4,7 @@
 # The source code for a number of Jackson projects is included in this repository as git submodules. This script
 # iterates through each of these submodules and executes a Maven "install".
 
-JACKSON_VERSION=2.12
+JACKSON_VERSION=2.14
 REPOS=(
   jackson-bom
   jackson-core

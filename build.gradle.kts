@@ -6,7 +6,7 @@ plugins {
 }
 
 val slf4jVersion = "1.7.32" // SLF4J releases: http://www.slf4j.org/news.html
-val jacksonVersion = "2.12.2-SNAPSHOT" // These artifacts must be built from source. See the README.md
+val jacksonVersion = "2.14.0-SNAPSHOT" // These artifacts must be built from source. See the README.md
 val junitPlatformVersion = "1.8.1" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
 val junitJupiterVersion = "5.8.1"
 
