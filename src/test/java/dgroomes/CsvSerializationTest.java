@@ -8,15 +8,16 @@ import dgroomes.point.PointWithGettersAndSetters;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Serializing to CSV
- *
+ * <p>
  * Referenced material:
- *   * https://github.com/FasterXML/jackson-dataformats-text/tree/master/csv
+ * * https://github.com/FasterXML/jackson-dataformats-text/tree/master/csv
  */
 public class CsvSerializationTest extends BaseTest {
 
@@ -89,5 +90,33 @@ public class CsvSerializationTest extends BaseTest {
         var serialized = writer.writeValueAsString(point);
 
         assertEquals(EXPECTED_CSV, serialized);
+    }
+
+    /**
+     * Serialize multiple entries to a CSV string. In other words, the CSV should have multiple rows.
+     */
+    @Test
+    void multipleEntries() throws Exception {
+        List<Map<String, Integer>> points;
+        ObjectWriter writer;
+        {
+            var schema = CsvSchema.builder()
+                    .addNumberColumn("x")
+                    .addNumberColumn("y")
+                    .build();
+            writer = csvMapper.writer(schema);
+        }
+        {
+            points = List.of(
+                    Map.of("x", 1, "y", 2),
+                    Map.of("x", 3, "y", 4));
+        }
+
+        var serialized = writer.writeValueAsString(points);
+
+        assertEquals("""
+                1,2
+                3,4
+                """, serialized);
     }
 }
