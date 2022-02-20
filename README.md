@@ -52,3 +52,5 @@ General clean ups, TODOs and things I wish to implement for this project:
 ## Reference
 
 * [Pro Git Chapter 7.11: Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+* [jackson-dataformats-text: Limitations](https://github.com/FasterXML/jackson-dataformats-text/tree/2.14/csv#limitations)
+  > Due to the tabular nature of CSV format, deeply nested data structures are not well supported.

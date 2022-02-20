@@ -5,10 +5,11 @@ plugins {
     java
 }
 
-val slf4jVersion = "1.7.32" // SLF4J releases: http://www.slf4j.org/news.html
+val slf4jVersion = "1.7.36" // SLF4J releases: http://www.slf4j.org/news.html
 val jacksonVersion = "2.14.0-SNAPSHOT" // These artifacts must be built from source. See the README.md
-val junitPlatformVersion = "1.8.1" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
-val junitJupiterVersion = "5.8.1"
+val junitPlatformVersion = "1.8.2" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
+val junitJupiterVersion = "5.8.2"
+val assertJVersion = "3.22.0" // AssertJ releases: https://github.com/assertj/assertj-core/tags
 
 java {
     toolchain {
@@ -17,16 +18,17 @@ java {
 }
 
 /**
- * Configure the compiler step to accommodate:
- * - Preserve parameter names in the bytecode to enable Jackson to deserialize using constructors
+ * Customize the tasks. Specifically, configure the compiler step to preserve parameter names in the bytecode to enable
+ * Jackson to deserialize using constructors. Also, enable Java language "Preview Features".
  */
 tasks {
     withType(JavaCompile::class.java) {
-        options.compilerArgs.addAll(arrayOf("-parameters"))
+        options.compilerArgs.addAll(arrayOf("-parameters", "--enable-preview"))
     }
 
     test {
         useJUnitPlatform()
+        jvmArgs = listOf("--enable-preview")
         testLogging {
             showStandardStreams = true
             events = setOf(TestLogEvent.STARTED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
@@ -36,6 +38,7 @@ tasks {
 }
 
 repositories {
+    // We purposely want to include 'mavenLocal' because we are depending on locally-built Jackson artifacts (.jar files).
     mavenLocal()
     mavenCentral()
 }
@@ -51,4 +54,5 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+    testImplementation("org.assertj:assertj-core:$assertJVersion")
 }
