@@ -16,5 +16,6 @@ REPOS=(
 
 for repo in "${REPOS[@]}"; do
   git -C "$repo" checkout "$JACKSON_VERSION"
+  git -C "$repo" pull
   mvn --file "$repo"/pom.xml install -Dmaven.test.skip=true
 done
