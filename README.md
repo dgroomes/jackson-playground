@@ -2,7 +2,10 @@
 
 📚 Learning and exploring Jackson <https://github.com/FasterXML/jackson>.
 
+
 ## Description
+
+**NOTE**: This project was developed on macOS. It is for my own personal use.
 
 This project explores the Jackson (<https://github.com/FasterXML/jackson>) umbrella of serialization/deserialization
 libraries which are often a core component of a Java application that deals with JSON. For example, it illustrates how
@@ -14,40 +17,61 @@ often about learning _new_ things! These Jackson projects must be built locally 
 repository (a.k.a the `.m2/`directory or `mavenLocal()` in Gradle terminology). Instructions to build these projects
 are in [Instructions](#instructions).
 
+
 ## Instructions
 
-
-**NOTE**: This was developed on macOS and for my own personal use.
+Follow these instructions to build the project and run the demo programs:
 
 1. After cloning the repo for the first time, you need to also clone the submodules:
-    * `git submodule update --init --recursive`
+    * ```shell
+      git submodule update --init --recursive
+      ```
 2. Update the submodules
     * If you had previously cloned the project and now want to update the submodules, then use the following command.
-    * `git submodule update --remote`
+    * ```shell
+      git submodule update --remote
+      ```
 4. Switch to Java 11
 5. Build the "edge version" of the Jackson artifacts:
-    * `./build-jackson-artifacts.sh`
+    * ```shell
+      ./build-jackson-artifacts.sh
+      ```
 6. Switch to Java 17
 7. Generate some test data (some of the tests depend on this):
-    * `./generate-test-data.sh`
+    * ```shell
+      ./generate-test-data.sh
+      ```
 8. Build the project and execute the tests:
-    * `./gradlew build`
+    * ```shell
+      ./gradlew build
+      ```
 9. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
    your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests cleaning
    them out and then running the tests: 
-    * `./gradlew cleanTest`
-    * `./gradlew build` or `./gradlew test`
+    * ```shell
+      ./gradlew cleanTest
+      ```
+    * ```shell
+      ./gradlew build
+      ```
+    * or,
+      ```shell
+      ./gradlew test
+      ```
+
 
 ## Wish List
 
 General clean ups, TODOs and things I wish to implement for this project:
 
-* DONE Use Jackson's CSV support for serializing
-* DONE Use Jackson's CSV support for deserializing
-* DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
-* DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
-* DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
-* Fix on a specific commit in the submodules instead of "master"
+* [x] DONE Use Jackson's CSV support for serializing
+* [x] DONE Use Jackson's CSV support for deserializing
+* [x] DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
+* [x] DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
+* [x] DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
+* [ ] Fix on a specific commit in the submodules instead of "master"
+* [ ] Make an example test that uses Jackson' TOML support
+
 
 ## Reference
 
