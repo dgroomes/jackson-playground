@@ -70,7 +70,6 @@ General clean ups, TODOs and things I wish to implement for this project:
 * [x] DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
 * [x] DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
 * [ ] Fix on a specific commit in the submodules instead of "master"
-* [ ] Make an example test that uses Jackson' TOML support
 
 
 ## Reference
