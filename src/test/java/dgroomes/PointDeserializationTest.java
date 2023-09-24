@@ -67,12 +67,11 @@ class PointDeserializationTest extends BaseTest {
         assertEquals(1, extracted.x());
     }
 
-    @Disabled("""
-            This does not work. The combination of a Java record and a multi-word snake case JSON field causes the break
-            but I'm not sure why. By contrast, the POJO corollary does work: dgroomes.PointDeserializationTest.pojoWithMultiWordFields.
-            
-            I think this GitHub issue describes the same thing https://github.com/FasterXML/jackson-databind/issues/3102
-            """)
+    /**
+     * The combination of a Java record and a multi-word snake case JSON field used to not work, but it works. Thanks
+     * Jackson and open source! See <a href="https://github.com/FasterXML/jackson-databind/issues/3102">GitHub issue #3102</a>
+     * which describes the same thing.
+     */
     @Test
     void recordWithMultiWordFields() throws Exception {
         var extracted = mapperParamNames.readValue(jsonMultiWordFields, PointRecordWithMultiWordFields.class);
