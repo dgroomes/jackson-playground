@@ -5,15 +5,15 @@ plugins {
     java
 }
 
-val slf4jVersion = "1.7.36" // SLF4J releases: http://www.slf4j.org/news.html
-val jacksonVersion = "2.14.0-SNAPSHOT" // These artifacts must be built from source. See the README.md
-val junitPlatformVersion = "1.8.2" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
-val junitJupiterVersion = "5.8.2"
-val assertJVersion = "3.22.0" // AssertJ releases: https://github.com/assertj/assertj-core/tags
+val slf4jVersion = "2.0.9" // SLF4J releases: http://www.slf4j.org/news.html
+val jacksonVersion = "2.16.0-SNAPSHOT" // These artifacts must be built from source. See the README.md
+val junitPlatformVersion = "1.10.0" // JUnit 5 releases: https://github.com/junit-team/junit5/releases
+val junitJupiterVersion = "5.10.0"
+val assertJVersion = "3.24.2" // AssertJ releases: https://github.com/assertj/assertj-core/tags
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(20))
     }
 }
 

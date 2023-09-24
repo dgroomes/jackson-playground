@@ -4,7 +4,7 @@
 # The source code for a number of Jackson projects is included in this repository as git submodules. This script
 # iterates through each of these submodules and executes a Maven "install".
 
-JACKSON_VERSION=2.14
+JACKSON_VERSION=2.16
 REPOS=(
   jackson-bom
   jackson-core
@@ -15,7 +15,9 @@ REPOS=(
 )
 
 for repo in "${REPOS[@]}"; do
-  git -C "$repo" checkout "$JACKSON_VERSION"
-  git -C "$repo" pull
-  mvn --file "$repo"/pom.xml install -Dmaven.test.skip=true
+  pushd "$repo"
+  git checkout "$JACKSON_VERSION"
+  git pull
+  mvnw install -Dmaven.test.skip=true
+  popd
 done

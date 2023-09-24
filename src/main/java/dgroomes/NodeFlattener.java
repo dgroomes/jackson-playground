@@ -75,7 +75,7 @@ public class NodeFlattener {
                     nodeStack.push(childNode);
                 });
 
-                case default -> throw new IllegalStateException("Unexpected JsonNode type: %s".formatted(node.jsonNode.getClass()));
+                default -> throw new IllegalStateException("Unexpected JsonNode type: %s".formatted(node.jsonNode.getClass()));
             }
         }
 

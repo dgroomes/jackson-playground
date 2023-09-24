@@ -22,30 +22,29 @@ are in [Instructions](#instructions).
 
 Follow these instructions to build the project and run the demo programs:
 
-1. After cloning the repo for the first time, you need to also clone the submodules:
+1. Pre-requisite: Java 20
+2. After cloning the repo for the first time, you need to also clone the submodules:
     * ```shell
       git submodule update --init --recursive
       ```
-2. Update the submodules
+3. Update the submodules
     * If you had previously cloned the project and now want to update the submodules, then use the following command.
     * ```shell
       git submodule update --remote
       ```
-4. Switch to Java 11
-5. Build the "edge version" of the Jackson artifacts:
+4. Build the "edge version" of the Jackson artifacts:
     * ```shell
       ./build-jackson-artifacts.sh
       ```
-6. Switch to Java 17
-7. Generate some test data (some of the tests depend on this):
+5. Generate some test data (some of the tests depend on this):
     * ```shell
       ./generate-test-data.sh
       ```
-8. Build the project and execute the tests:
+6. Build the project and execute the tests:
     * ```shell
       ./gradlew build
       ```
-9. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
+7. (Optional) If the tests had previously run and passed and no source code has changed then Gradle might choose to skip
    your tests when you would otherwise prefer to actually have your tests execute. Force Gradle to run the tests cleaning
    them out and then running the tests: 
     * ```shell
@@ -62,14 +61,14 @@ Follow these instructions to build the project and run the demo programs:
 
 ## Wish List
 
-General clean ups, TODOs and things I wish to implement for this project:
+General clean-ups, TODOs and things I wish to implement for this project:
 
 * [x] DONE Use Jackson's CSV support for serializing
 * [x] DONE Use Jackson's CSV support for deserializing
 * [x] DONE Experiment with serializing from Records to a string, not just deserializing from a string into Records
 * [x] DONE Migrate to Gradle's Kotlin DSL (use <https://github.com/dgroomes/gradle-playground> as reference)
 * [x] DONE Generate "Points" (x,y) in the test data generation script instead of the arbitrary "DummyType" type 
-* [ ] Fix on a specific commit in the submodules instead of "master"
+* [x] (this was already done? I just have a hard time understanding git submodules like most folks) Fix on a specific commit in the submodules instead of "master"
 
 
 ## Reference
